@@ -6,7 +6,10 @@ import * as express from 'express';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
+  app.enableCors({
+    origin: '*',
+    credentials: true,
+  });
   app.setGlobalPrefix('api');
   app.use('/songs', express.static(path.join(process.cwd(), 'static/songs')));
 
@@ -19,7 +22,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
 
   SwaggerModule.setup('api', app, document);
-  app.enableCors();
+
   await app.listen(process.env.PORT);
   console.log('streaming_service_api listen port', process.env.PORT);
 }
