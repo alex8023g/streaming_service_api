@@ -53,7 +53,7 @@ export class Song {
 
   @ApiProperty({ type: () => [Playlist], description: 'Playlists' })
   @ManyToMany(() => Playlist, (playlist: Playlist) => playlist.songs)
-  // @JoinTable()
+  @JoinTable()
   playlists: Promise<Playlist[]>;
 
   @ApiProperty({ type: () => [User], description: 'Likes' })
